@@ -3,13 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
-<meta property="og:title" content="Why H.I.M. Exists">
-<meta property="og:description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
-<meta property="og:type" content="article">
+<meta name="description" content="Why Haaris built H.I.M. — a friendship-first social app for gay men that takes a different approach.">
+<meta property="og:title" content="Why H.I.M. Exists — From the Founder">
+<meta property="og:description" content="Most apps for gay men are built around appearances and speed. H.I.M. was built for something different: real friendship and community.">
+<meta property="og:url" content="https://www.hiitsme.app/why.html">
+<meta property="og:type" content="website">
+<!-- TODO: Add og-image.png (1200×630px) to root and uncomment -->
+<meta property="og:image" content="https://www.hiitsme.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Why H.I.M. Exists">
-<meta name="twitter:description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
+<meta name="twitter:title" content="Why H.I.M. Exists — From the Founder">
+<meta name="twitter:description" content="Most apps for gay men are built around appearances and speed. H.I.M. was built for something different: real friendship and community.">
+<meta name="twitter:image" content="https://www.hiitsme.app/og-image.png">
 <title>Why H.I.M. Exists</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +23,8 @@
   --bg: #13100E;
   --bg-card: #1D1916;
   --text: #F7F0E8;
-  --text-muted: #9C8E82;
+  --text-muted: #BEB2A5;
+  --text-muted-soft: #9C8E82;
   --rose: #E8608A;
   --gold: #D4963A;
   --border: rgba(255,255,255,0.07);
@@ -57,12 +62,60 @@ body::after {
   z-index: 0;
 }
 
+/* nav */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(19,16,14,0.95) 60%, transparent);
+}
+
+.wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.wordmark span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-muted-soft);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: -2px;
+}
+
+.nav-cta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--rose);
+  background: var(--rose-glow);
+  border: 1px solid rgba(232,96,138,0.25);
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover {
+  background: rgba(232,96,138,0.18);
+}
+
 .container {
   position: relative;
   z-index: 1;
   max-width: 620px;
   margin: 0 auto;
-  padding: 64px 24px 96px;
+  padding: 100px 24px 96px;
 }
 
 /* back link */
@@ -72,7 +125,7 @@ body::after {
   gap: 6px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   text-decoration: none;
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.03);
@@ -91,7 +144,7 @@ body::after {
 
 /* page header */
 .page-header {
-  margin-top: 48px;
+  margin-top: 32px;
 }
 
 .page-tag {
@@ -163,22 +216,32 @@ body::after {
 
 /* signoff */
 .signoff {
-  font-size: 16px;
-  color: var(--text);
-  font-weight: 400;
-  line-height: 1.6;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
 }
 
 .signoff .name {
   font-family: 'DM Serif Display', serif;
   font-size: 18px;
+  color: var(--text);
   margin-bottom: 2px;
 }
 
 .signoff .role {
   font-size: 13px;
   font-weight: 300;
+  color: var(--text-muted-soft);
+}
+
+/* transition text */
+.cta-transition {
+  font-size: 16px;
+  font-weight: 300;
   color: var(--text-muted);
+  line-height: 1.75;
+  margin-top: 40px;
+  margin-bottom: 24px;
 }
 
 /* CTA card */
@@ -187,7 +250,6 @@ body::after {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 32px;
-  margin-top: 56px;
   text-align: center;
   transition: border-color 0.2s;
 }
@@ -231,7 +293,7 @@ body::after {
   min-width: 0;
 }
 
-.cta-form input::placeholder { color: var(--text-muted); opacity: 0.5; }
+.cta-form input::placeholder { color: var(--text-muted-soft); opacity: 0.5; }
 
 .cta-form button {
   background: var(--rose);
@@ -252,7 +314,7 @@ body::after {
 
 .cta-note {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   margin-top: 10px;
   opacity: 0.5;
 }
@@ -272,24 +334,26 @@ body::after {
   padding-top: 28px;
   text-align: center;
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   opacity: 0.5;
 }
 
 @media (max-width: 640px) {
+  nav { padding: 16px 20px; }
   .container {
-    padding: 48px 20px 80px;
+    padding: 88px 20px 80px;
+    max-width: 680px;
   }
   .page-header {
-    margin-top: 36px;
+    margin-top: 24px;
   }
   .cta-form {
     flex-direction: column;
     padding: 10px;
     border-radius: 16px;
   }
-  .cta-form input { padding: 6px 8px; }
-  .cta-form button { width: 100%; padding: 12px; border-radius: 10px; }
+  .cta-form input { padding: 8px; font-size: 16px; }
+  .cta-form button { width: 100%; padding: 14px; border-radius: 10px; min-height: 48px; font-size: 15px; }
 }
 </style>
 </head>
@@ -297,13 +361,21 @@ body::after {
 
 <div class="orb"></div>
 
+<nav>
+  <a href="index.html" class="wordmark">
+    H.I.M.
+    <span>hi, it's me</span>
+  </a>
+  <a href="index.html#form-row" class="nav-cta">Early access</a>
+</nav>
+
 <div class="container">
 
   <a href="index.html" class="back-link">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M10 13 5 8l5-5"/>
     </svg>
-    H.I.M.
+    Back to H.I.M.
   </a>
 
   <header class="page-header">
@@ -358,12 +430,14 @@ body::after {
       <div class="role">Founder, H.I.M.</div>
     </div>
 
-    <!-- CTA -->
+    <!-- Transition + CTA -->
+    <p class="cta-transition">If this sounds like what you've been looking for, join the list.</p>
+
     <div class="cta-card">
       <div class="cta-title">Join the early access list</div>
       <div class="cta-form" id="why-form-row">
         <input type="email" id="why-email" placeholder="your@email.com" autocomplete="email" />
-        <button onclick="handleWhySubmit()">Join Early Access</button>
+        <button onclick="handleWhySubmit()">Get on the list</button>
       </div>
       <div class="cta-success" id="why-success">
         You're on the list. We'll reach out before launch.

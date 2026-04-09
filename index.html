@@ -3,13 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="H.I.M. is a social app for gay men built for friendship, conversation, and community. Screennames. Away messages. Buddy lists. No swiping. No pressure.">
+<meta name="description" content="A social app for gay men built for friendship, conversation, and community. Inspired by screennames, away messages, buddy lists, and chat rooms.">
 <meta property="og:title" content="H.I.M. — Hi, It's Me.">
-<meta property="og:description" content="A social app for gay men built for friendship, conversation, and community.">
+<meta property="og:description" content="A friendship-first social app for gay men. Not another hookup app. Built for real conversation and community.">
+<meta property="og:url" content="https://www.hiitsme.app/">
 <meta property="og:type" content="website">
+<!-- TODO: Add og-image.png (1200×630px) to root and uncomment -->
+<meta property="og:image" content="https://www.hiitsme.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="H.I.M. — Hi, It's Me.">
-<meta name="twitter:description" content="A social app for gay men built for friendship, conversation, and community.">
+<meta name="twitter:description" content="A friendship-first social app for gay men. Not another hookup app. Built for real conversation and community.">
+<meta name="twitter:image" content="https://www.hiitsme.app/og-image.png">
 <title>H.I.M. — Hi, It's Me.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +24,8 @@
   --bg-card: #1D1916;
   --bg-input: #1D1916;
   --text: #F7F0E8;
-  --text-muted: #9C8E82;
+  --text-muted: #BEB2A5;
+  --text-muted-soft: #9C8E82;
   --rose: #E8608A;
   --gold: #D4963A;
   --border: rgba(255,255,255,0.07);
@@ -84,7 +89,7 @@ nav {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 300;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   display: block;
@@ -104,24 +109,24 @@ nav {
 
 /* hero */
 .hero {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 120px 24px 80px;
+  padding: 100px 24px 60px;
   position: relative;
   z-index: 1;
 }
 
 .hero-headline {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(36px, 7vw, 72px);
+  font-size: clamp(32px, 6vw, 64px);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.1;
   color: var(--text);
-  max-width: 720px;
+  max-width: 680px;
   margin-bottom: 24px;
   opacity: 0;
   animation: fadeUp 0.7s ease forwards 0.1s;
@@ -141,7 +146,7 @@ nav {
   color: var(--text-muted);
   max-width: 520px;
   line-height: 1.7;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   opacity: 0;
   animation: fadeUp 0.7s ease forwards 0.25s;
 }
@@ -152,6 +157,13 @@ nav {
   max-width: 440px;
   opacity: 0;
   animation: fadeUp 0.7s ease forwards 0.4s;
+}
+
+.social-proof {
+  font-size: 0.8rem;
+  color: var(--text-muted-soft);
+  text-align: center;
+  margin-bottom: 12px;
 }
 
 .form-row {
@@ -177,9 +189,10 @@ nav {
   font-size: 14px;
   color: var(--text);
   font-weight: 400;
+  min-width: 0;
 }
 
-.form-row input::placeholder { color: var(--text-muted); opacity: 0.5; }
+.form-row input::placeholder { color: var(--text-muted-soft); opacity: 0.5; }
 
 .form-row button {
   background: var(--rose);
@@ -200,7 +213,7 @@ nav {
 
 .form-note {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   margin-top: 10px;
   opacity: 0.5;
   text-align: center;
@@ -236,15 +249,6 @@ nav {
   color: var(--rose);
   margin-bottom: 24px;
   text-align: center;
-}
-
-.section-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(24px, 4vw, 36px);
-  color: var(--text);
-  text-align: center;
-  line-height: 1.2;
-  margin-bottom: 28px;
 }
 
 .section-body {
@@ -304,6 +308,30 @@ nav {
   font-weight: 400;
 }
 
+/* why link block */
+.why-link-block {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.why-link-block a {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--rose);
+  text-decoration: none;
+  transition: opacity 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.why-link-block a:hover {
+  opacity: 0.75;
+}
+
 /* bottom CTA */
 .bottom-cta {
   padding: 60px 24px 40px;
@@ -314,27 +342,6 @@ nav {
 
 .bottom-cta .section-body {
   margin-bottom: 32px;
-}
-
-/* why link */
-.why-link-wrap {
-  text-align: center;
-  padding: 0 24px 60px;
-  position: relative;
-  z-index: 1;
-}
-
-.why-link {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-  letter-spacing: 0.02em;
-}
-
-.why-link:hover {
-  color: var(--text);
 }
 
 /* footer */
@@ -357,14 +364,14 @@ footer {
 
 .footer-tagline {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   opacity: 0.5;
   font-style: italic;
 }
 
 .footer-note {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-muted-soft);
   opacity: 0.4;
 }
 
@@ -375,12 +382,14 @@ footer {
 
 @media (max-width: 640px) {
   nav { padding: 16px 20px; }
-  .hero { padding: 100px 20px 60px; }
+  .hero { padding: 80px 20px 48px; min-height: 100svh; }
+  .hero-headline { font-size: clamp(28px, 7vw, 40px); max-width: 100%; }
+  .hero-sub { margin-bottom: 32px; }
   .features { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 8px; text-align: center; }
   .form-row { flex-direction: column; padding: 10px; border-radius: 16px; }
-  .form-row input { padding: 6px 8px; }
-  .form-row button { width: 100%; padding: 12px; border-radius: 10px; }
+  .form-row input { padding: 8px; font-size: 16px; }
+  .form-row button { width: 100%; padding: 14px; border-radius: 10px; min-height: 48px; font-size: 15px; }
 }
 </style>
 </head>
@@ -403,9 +412,11 @@ footer {
   <p class="hero-sub">Inspired by the parts of the internet that once felt more personal: screennames, away messages, buddy lists, and chat rooms.</p>
 
   <div class="form-wrap">
+    <!-- TODO: replace with live count when available -->
+    <p class="social-proof">Spots filling up. Be among the first.</p>
     <div class="form-row" id="form-row">
       <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
-      <button onclick="handleSubmit()">Join Early Access</button>
+      <button onclick="handleSubmit()">Get on the list</button>
     </div>
     <div class="success-msg" id="success-msg">
       You're on the list. We'll reach out before launch.
@@ -449,6 +460,11 @@ footer {
   </div>
 </section>
 
+<!-- Why link block -->
+<div class="why-link-block">
+  <a href="why.html">Read why we're building this differently &rarr;</a>
+</div>
+
 <!-- Bottom CTA -->
 <section class="bottom-cta">
   <div class="section-body" style="max-width: 480px; margin: 0 auto 32px;">
@@ -457,7 +473,7 @@ footer {
   <div class="form-wrap" style="margin: 0 auto; opacity: 1; animation: none;">
     <div class="form-row" id="form-row-bottom">
       <input type="email" id="email-input-bottom" placeholder="your@email.com" autocomplete="email" />
-      <button onclick="handleSubmitBottom()">Join Early Access</button>
+      <button onclick="handleSubmitBottom()">Get on the list</button>
     </div>
     <div class="success-msg" id="success-msg-bottom">
       You're on the list. We'll reach out before launch.
@@ -465,11 +481,6 @@ footer {
     <p class="form-note">No spam. No nonsense. Just launch updates and early access.</p>
   </div>
 </section>
-
-<!-- Why link -->
-<div class="why-link-wrap">
-  <a href="why.html" class="why-link">Why H.I.M. exists &rarr;</a>
-</div>
 
 <footer>
   <div class="footer-wordmark">H.I.M.</div>
