@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
+<meta property="og:title" content="Why H.I.M. Exists">
+<meta property="og:description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why H.I.M. Exists">
+<meta name="twitter:description" content="Why I'm building H.I.M. — the problem it solves, who it's for, and what makes it different.">
+<title>Why H.I.M. Exists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #13100E;
+  --bg-card: #1D1916;
+  --text: #F7F0E8;
+  --text-muted: #9C8E82;
+  --rose: #E8608A;
+  --gold: #D4963A;
+  --border: rgba(255,255,255,0.07);
+  --rose-glow: rgba(232,96,138,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);
+  top: 20%;
+  left: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+/* back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+.back-link:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+.back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* page header */
+.page-header {
+  margin-top: 48px;
+}
+
+.page-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-top: 16px;
+  letter-spacing: -0.02em;
+}
+
+/* content */
+.content {
+  margin-top: 48px;
+}
+
+.content-section {
+  margin-bottom: 48px;
+}
+
+.content-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.content-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 16px;
+}
+
+.content-text {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.content-text p {
+  margin-bottom: 16px;
+}
+
+.content-text p:last-child {
+  margin-bottom: 0;
+}
+
+.content-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 48px 0;
+}
+
+/* signoff */
+.signoff {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.signoff .name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.signoff .role {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* CTA card */
+.cta-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 56px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.cta-card:hover {
+  border-color: rgba(232,96,138,0.2);
+}
+
+.cta-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.cta-form {
+  display: flex;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px 6px 6px 18px;
+  max-width: 400px;
+  margin: 0 auto;
+  transition: border-color 0.2s;
+}
+
+.cta-form:focus-within {
+  border-color: rgba(232,96,138,0.35);
+}
+
+.cta-form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 400;
+  min-width: 0;
+}
+
+.cta-form input::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+.cta-form button {
+  background: var(--rose);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.cta-form button:hover { opacity: 0.88; }
+.cta-form button:active { transform: scale(0.97); }
+
+.cta-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  opacity: 0.5;
+}
+
+.cta-success {
+  display: none;
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 500;
+  padding: 14px;
+}
+
+/* footer */
+.page-footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 48px 20px 80px;
+  }
+  .page-header {
+    margin-top: 36px;
+  }
+  .cta-form {
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 16px;
+  }
+  .cta-form input { padding: 6px 8px; }
+  .cta-form button { width: 100%; padding: 12px; border-radius: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb"></div>
+
+<div class="container">
+
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 13 5 8l5-5"/>
+    </svg>
+    H.I.M.
+  </a>
+
+  <header class="page-header">
+    <div class="page-tag">From the founder</div>
+    <h1 class="page-title">Why H.I.M. exists</h1>
+  </header>
+
+  <div class="content">
+
+    <!-- Intro -->
+    <section class="content-section">
+      <div class="content-text">
+        <p>H.I.M. started with a simple observation: many of the tools that once made online interaction feel personal have been replaced by products optimized for speed and surface-level engagement.</p>
+        <p>I wanted to build something that felt more human.</p>
+      </div>
+    </section>
+
+    <!-- Founder intro -->
+    <section class="content-section">
+      <div class="content-label">Who I am</div>
+      <div class="content-text">
+        <p>I'm Haaris, and H.I.M. is my attempt to create a social app for gay men that gives more weight to personality, conversation, and community than the current category typically allows.</p>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="content-section">
+      <div class="content-label">The problem</div>
+      <div class="content-text">
+        <p>Most apps built for gay men are built around the same assumptions. Photos first. Proximity first. Quick decisions.</p>
+        <p>That works for hookups, but it leaves very little room for friendship.</p>
+        <p>That gap feels especially clear for gay men. Some apps are hookup-first by design. Some are still dating-adjacent. Others are broader queer social platforms, but they do not feel specifically built for gay men in a focused way.</p>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="content-section">
+      <div class="content-label">What H.I.M. does differently</div>
+      <div class="content-text">
+        <p>H.I.M. is meant to solve for that gap.</p>
+        <p>It draws from what made AIM feel personal and social: screennames, away messages, buddy lists, and chat rooms.</p>
+        <p>Not just for nostalgia, but because those mechanics made more room for identity, regular interaction, and actual community.</p>
+        <p>H.I.M. is not a dating app in disguise. It is not another hookup app with softer branding. It is meant to be a real social product in its own right.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Signoff -->
+    <div class="signoff">
+      <div class="name">Haaris</div>
+      <div class="role">Founder, H.I.M.</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+      <div class="cta-title">Join the early access list</div>
+      <div class="cta-form" id="why-form-row">
+        <input type="email" id="why-email" placeholder="your@email.com" autocomplete="email" />
+        <button onclick="handleWhySubmit()">Join Early Access</button>
+      </div>
+      <div class="cta-success" id="why-success">
+        You're on the list. We'll reach out before launch.
+      </div>
+      <p class="cta-note">No spam. No nonsense. Just launch updates and early access.</p>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    Friendship-first social for gay men. &middot; hiitsme.app &middot; &copy; 2025 Saman Technologies LLC
+  </footer>
+
+</div>
+
+<script>
+function handleWhySubmit() {
+  var email = document.getElementById('why-email').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('why-email').style.outline = '2px solid #E8608A';
+    setTimeout(function() { document.getElementById('why-email').style.outline = ''; }, 1200);
+    return;
+  }
+  document.getElementById('why-form-row').style.display = 'none';
+  document.getElementById('why-success').style.display = 'block';
+  fetch('https://formspree.io/f/xlgoowzq', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, source: 'HIM landing page - why page' })
+  });
+}
+
+document.getElementById('why-email').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') handleWhySubmit();
+});
+</script>
+
+</body>
+</html>
