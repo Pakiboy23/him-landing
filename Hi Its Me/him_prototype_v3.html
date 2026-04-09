@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H.I.M. App Prototype v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Deep, rich base — not cold black, warm dark */
+  --bg:         #13100E;
+  --bg2:        #1D1916;
+  --bg3:        #27221E;
+  --bg4:        #322C27;
+  --text:       #F7F0E8;
+  --muted:      #9C8E82;
+  --faint:      #3A3028;
+
+  /* Two accent colors that feel chosen together */
+  --rose:       #E8608A;   /* the gay accent */
+  --rose-dim:   rgba(232,96,138,0.12);
+  --rose-brd:   rgba(232,96,138,0.28);
+  --gold:       #D4963A;   /* the warmth */
+  --gold-dim:   rgba(212,150,58,0.10);
+  --gold-brd:   rgba(212,150,58,0.25);
+
+  /* Status colors */
+  --green:      #4EC97A;
+  --green-bg:   rgba(78,201,122,0.10);
+  --lavender:   #A78BFA;
+  --sky:        #60B8E8;
+
+  --mono:  'IBM Plex Mono', monospace;
+  --sans:  'Nunito', sans-serif;
+  --phone-w: 375px;
+  --phone-h: 800px;
+}
+
+body {
+  font-family: var(--sans);
+  background: #0C0A08;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ─── PAGE HEADER ─── */
+.page-header { text-align: center; margin-bottom: 28px; }
+.him-logotype {
+  font-family: var(--mono);
+  font-size: 26px; font-weight: 600;
+  letter-spacing: 0.2em;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+.page-header p { font-size: 12px; color: var(--muted); font-style: italic; }
+
+/* ─── NAV ─── */
+.screen-nav { display: flex; gap: 6px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center; }
+.snav-btn {
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--faint); background: transparent;
+  color: var(--muted); font-family: var(--mono); font-size: 11px;
+  cursor: pointer; transition: all 0.18s; letter-spacing: 0.04em;
+}
+.snav-btn:hover { border-color: var(--rose); color: var(--rose); }
+.snav-btn.active { background: var(--rose-dim); border-color: var(--rose); color: var(--rose); }
+
+/* ─── PHONE ─── */
+.phone-wrap { position: relative; width: var(--phone-w); height: var(--phone-h); }
+.phone-frame {
+  position: absolute; inset: 0;
+  border-radius: 48px;
+  border: 2px solid #2C2420;
+  background: var(--bg);
+  overflow: hidden;
+  box-shadow:
+    0 50px 100px rgba(0,0,0,0.85),
+    0 0 0 1px #1a1410 inset,
+    0 0 60px rgba(232,96,138,0.04) inset;
+}
+.notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 32px; background: #0C0A08;
+  border-radius: 0 0 20px 20px; z-index: 100;
+}
+
+/* ─── STATUS BAR ─── */
+.status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 24px 0; height: 48px; z-index: 10; position: relative;
+}
+.status-time { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text); }
+.status-icons { font-size: 11px; color: var(--text); display: flex; gap: 5px; align-items: center; }
+
+/* ─── SCREEN ─── */
+.screen { display: none; flex-direction: column; height: calc(var(--phone-h) - 48px); overflow: hidden; }
+.screen.active { display: flex; }
+
+/* ─── APP HEADER — the DNA moment ─── */
+.app-header {
+  padding: 10px 18px 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--faint);
+}
+/* gradient bar across top — rose to gold, subtle */
+.app-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+}
+/* scanlines */
+.app-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
+  pointer-events: none;
+}
+
+.app-title {
+  font-family: var(--mono); font-size: 17px; font-weight: 600;
+  letter-spacing: 0.14em;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.online-pip {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 7px var(--green);
+  margin-left: 6px; vertical-align: middle;
+  animation: pip-pulse 2.2s ease-in-out infinite;
+}
+@keyframes pip-pulse { 0%,100%{opacity:1;box-shadow:0 0 7px var(--green)} 50%{opacity:.5;box-shadow:0 0 2px var(--green)} }
+.app-sub { font-size: 10px; color: var(--muted); font-family: var(--mono); margin-top: 2px; letter-spacing: 0.04em; }
+
+.header-btn {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: var(--bg3); border: 1px solid var(--faint);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px; color: var(--muted);
+  transition: all 0.15s;
+}
+.header-btn:hover { border-color: var(--rose); color: var(--rose); }
+
+/* ─── SCREEN BODY ─── */
+.screen-body { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+.screen-body::-webkit-scrollbar { display: none; }
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 13px 18px 5px;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono);
+}
+.section-label.rose { color: var(--rose); }
+.section-label.gold { color: var(--gold); }
+.section-label.muted { color: var(--muted); }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
+
+/* ─── MY STATUS ─── */
+.my-status {
+  margin: 12px 16px;
+  background: linear-gradient(135deg, rgba(232,96,138,0.08) 0%, rgba(212,150,58,0.08) 100%);
+  border: 1px solid rgba(232,96,138,0.2);
+  border-radius: 18px; padding: 13px 15px;
+  position: relative; overflow: hidden;
+}
+.my-status::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  opacity: 0.5;
+}
+.my-status-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; font-family: var(--mono);
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 7px;
+}
+.my-status-text {
+  font-size: 12px; color: var(--text); font-style: italic;
+  font-weight: 300; line-height: 1.5; margin-bottom: 10px;
+}
+.my-status-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  font-size: 10px; font-family: var(--mono);
+  padding: 4px 11px; border-radius: 20px; border: 1px solid;
+  cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; font-weight: 400;
+}
+.chip-rose { color: var(--rose); border-color: var(--rose-brd); background: var(--rose-dim); }
+.chip-gold { color: var(--gold); border-color: var(--gold-brd); background: var(--gold-dim); }
+.chip-green { color: var(--green); border-color: rgba(78,201,122,0.25); background: var(--green-bg); }
+.chip-ghost { color: var(--muted); border-color: var(--faint); background: transparent; }
+
+/* ─── BUDDY CARD ─── */
+.buddy-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer; transition: background 0.12s;
+}
+.buddy-card:hover { background: var(--bg2); }
+
+/* pill-shaped avatar — softer, more expressive */
+.avatar {
+  width: 42px; height: 42px; border-radius: 14px;
+  background: var(--bg3); display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0; position: relative;
+  border: 1px solid var(--faint);
+}
+.avatar.has-unread { border-color: var(--rose); box-shadow: 0 0 8px rgba(232,96,138,0.2); }
+
+/* Status dot with glow */
+.sdot {
+  position: absolute; bottom: -3px; right: -3px;
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid var(--bg); display: flex; align-items: center; justify-content: center;
+}
+.sdot::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+.sdot.online { background: var(--green); box-shadow: 0 0 7px rgba(78,201,122,0.7); }
+.sdot.away   { background: var(--gold); box-shadow: 0 0 7px rgba(212,150,58,0.6); }
+.sdot.idle   { background: var(--lavender); box-shadow: 0 0 5px rgba(167,139,250,0.5); }
+.sdot.offline { background: var(--faint); }
+.sdot.offline::after { display: none; }
+
+.buddy-info { flex: 1; min-width: 0; }
+.buddy-name {
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  color: var(--text); margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.buddy-away {
+  font-size: 12px; color: var(--muted); font-weight: 300;
+  font-style: italic; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.buddy-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+.buddy-time { font-size: 10px; color: var(--muted); font-family: var(--mono); }
+.unread {
+  min-width: 18px; height: 18px; border-radius: 9px;
+  background: var(--rose); color: white;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 0 10px rgba(232,96,138,0.4);
+}
+
+/* ─── CHAT ─── */
+.chat-header {
+  padding: 10px 16px; border-bottom: 1px solid var(--faint);
+  display: flex; align-items: flex-start; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.chat-header::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+}
+.back { font-size: 24px; color: var(--rose); background: none; border: none; cursor: pointer; line-height: 1; margin-top: 4px; }
+.chat-hinfo { flex: 1; }
+.chat-hname { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--text); }
+.chat-hstatus { font-size: 10px; color: var(--green); font-family: var(--mono); margin-top: 1px; }
+.chat-haway {
+  font-size: 11px; color: var(--muted); font-style: italic; font-weight: 300;
+  line-height: 1.4; margin-top: 6px;
+  padding: 5px 9px; background: var(--bg2); border-radius: 8px;
+  border-left: 2px solid var(--rose);
+}
+.chat-havatar { width: 34px; height: 34px; border-radius: 10px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; border: 1px solid var(--faint); }
+
+.chat-messages { flex: 1; overflow-y: auto; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 3px; }
+.chat-messages::-webkit-scrollbar { display: none; }
+.chat-date {
+  text-align: center; font-size: 9px; color: var(--muted); font-family: var(--mono);
+  letter-spacing: 0.08em; margin: 8px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.chat-date::before,.chat-date::after { content:''; flex:1; height:1px; background: var(--faint); }
+
+.msg-row { display: flex; flex-direction: column; max-width: 80%; margin-bottom: 4px; }
+.msg-row.me { align-self: flex-end; align-items: flex-end; }
+.msg-row.them { align-self: flex-start; align-items: flex-start; }
+.msg-name { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-bottom: 2px; padding: 0 4px; }
+.msg-bub { padding: 9px 13px; border-radius: 18px; font-size: 13px; line-height: 1.5; font-weight: 300; }
+.msg-row.me .msg-bub {
+  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
+  color: white; border-bottom-right-radius: 5px;
+}
+.msg-row.them .msg-bub { background: var(--bg3); color: var(--text); border-bottom-left-radius: 5px; }
+.msg-time { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-top: 2px; padding: 0 4px; }
+
+.chat-input-bar {
+  padding: 10px 14px 20px; display: flex; gap: 8px; align-items: center;
+  border-top: 1px solid var(--faint);
+}
+.chat-inp {
+  flex: 1; background: var(--bg3); border: 1px solid var(--faint);
+  border-radius: 22px; padding: 10px 15px;
+  font-family: var(--sans); font-size: 13px; font-weight: 300;
+  color: var(--text); outline: none; transition: border-color 0.2s;
+}
+.chat-inp:focus { border-color: var(--rose); }
+.chat-inp::placeholder { color: var(--muted); }
+.send-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
+  border: none; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px; color: white; flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(232,96,138,0.35);
+}
+
+/* ─── ROOMS ─── */
+.room-filters {
+  padding: 10px 16px 6px; display: flex; gap: 6px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.room-filters::-webkit-scrollbar { display: none; }
+.rf-chip {
+  font-size: 10px; font-family: var(--mono); padding: 5px 12px;
+  border-radius: 20px; border: 1px solid; white-space: nowrap;
+  cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em;
+}
+.rf-chip.on { background: var(--rose-dim); border-color: var(--rose); color: var(--rose); }
+.rf-chip.off { border-color: var(--faint); color: var(--muted); }
+
+.room-card {
+  padding: 13px 18px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; transition: background 0.12s; position: relative;
+}
+.room-card:hover { background: var(--bg2); }
+/* rose left accent on active rooms */
+.room-card.live::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+  width: 3px; border-radius: 3px;
+  background: linear-gradient(to bottom, var(--rose), var(--gold));
+}
+.room-card.live { padding-left: 24px; }
+
+.room-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.room-name { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--text); }
+.room-live-pill {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9px; font-family: var(--mono); color: var(--green);
+  background: var(--green-bg); padding: 3px 8px; border-radius: 10px;
+  border: 1px solid rgba(78,201,122,0.2);
+}
+.live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: blink 1.5s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
+.room-count-pill {
+  font-size: 9px; font-family: var(--mono); color: var(--muted);
+  border: 1px solid var(--faint); padding: 2px 8px; border-radius: 10px;
+}
+
+.room-last { font-size: 11px; color: var(--muted); font-weight: 300; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.room-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.rtag {
+  font-size: 9px; font-family: var(--mono); padding: 2px 8px;
+  border-radius: 10px; border: 1px solid; letter-spacing: 0.02em;
+}
+.rtag-rose { color: var(--rose); border-color: var(--rose-brd); background: var(--rose-dim); }
+.rtag-gold { color: var(--gold); border-color: var(--gold-brd); background: var(--gold-dim); }
+.rtag-lav  { color: var(--lavender); border-color: rgba(167,139,250,0.25); background: rgba(167,139,250,0.08); }
+.rtag-sky  { color: var(--sky); border-color: rgba(96,184,232,0.25); background: rgba(96,184,232,0.08); }
+.rtag-ghost { color: var(--muted); border-color: var(--faint); background: transparent; }
+
+/* ─── AWAY EDITOR ─── */
+.away-editor { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.away-editor::-webkit-scrollbar { display: none; }
+.away-field-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; font-family: var(--mono);
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 8px;
+}
+.mood-row { display: flex; gap: 6px; }
+.mood-btn {
+  flex: 1; padding: 9px 4px; border-radius: 14px;
+  border: 1px solid var(--faint); background: var(--bg2);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  cursor: pointer; transition: all 0.15s;
+}
+.mood-btn.active {
+  border-color: var(--rose); background: var(--rose-dim);
+  box-shadow: 0 0 12px rgba(232,96,138,0.15);
+}
+.mood-icon { font-size: 17px; line-height: 1; }
+.mood-label { font-size: 9px; color: var(--muted); font-family: var(--mono); }
+.mood-btn.active .mood-label { color: var(--rose); }
+
+.away-textarea {
+  background: var(--bg2); border: 1px solid var(--faint);
+  border-radius: 16px; padding: 13px 15px;
+  font-family: var(--sans); font-size: 13px;
+  color: var(--text); font-style: italic; font-weight: 300;
+  line-height: 1.6; outline: none; resize: none;
+  width: 100%; height: 88px; transition: border-color 0.2s;
+}
+.away-textarea:focus { border-color: var(--rose); }
+.away-textarea::placeholder { color: var(--muted); font-style: italic; }
+.away-char-row { display: flex; justify-content: space-between; align-items: center; margin-top: -8px; }
+.away-char-hint { font-size: 10px; color: var(--muted); font-style: italic; }
+.away-char-count { font-size: 10px; color: var(--muted); font-family: var(--mono); }
+
+/* preview card */
+.away-preview {
+  background: var(--bg2);
+  border: 1px solid var(--rose-brd);
+  border-radius: 16px; padding: 12px 14px;
+  position: relative; overflow: hidden;
+}
+.away-preview::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  opacity: 0.6;
+}
+.preview-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); font-family: var(--mono); margin-bottom: 9px; }
+.prev-row { display: flex; gap: 10px; align-items: flex-start; }
+.prev-av {
+  width: 36px; height: 36px; border-radius: 11px;
+  background: var(--bg3); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; position: relative;
+  border: 1px solid var(--rose-brd);
+}
+.prev-dot { position: absolute; bottom: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: var(--green); border: 2px solid var(--bg2); box-shadow: 0 0 5px var(--green); }
+.prev-info { flex: 1; }
+.prev-name { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.prev-away { font-size: 11px; color: var(--muted); font-style: italic; font-weight: 300; line-height: 1.4; }
+
+.preset-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; font-family: var(--mono); }
+.away-preset {
+  background: var(--bg2); border: 1px solid var(--faint); border-radius: 12px;
+  padding: 9px 13px; font-size: 11px; color: var(--muted); font-style: italic;
+  font-weight: 300; cursor: pointer; margin-bottom: 6px; transition: all 0.15s;
+  width: 100%; text-align: left; font-family: var(--sans); line-height: 1.4;
+}
+.away-preset:hover { border-color: var(--rose); color: var(--text); background: var(--rose-dim); }
+
+/* THE button — gradient, bold */
+.save-btn {
+  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
+  color: white; border: none; border-radius: 16px; padding: 14px;
+  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  cursor: pointer; width: 100%; letter-spacing: 0.08em;
+  box-shadow: 0 6px 24px rgba(232,96,138,0.3);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.save-btn:hover { opacity: 0.92; box-shadow: 0 8px 28px rgba(232,96,138,0.4); }
+
+/* ─── PROFILE ─── */
+.profile-hero {
+  padding: 20px 18px 16px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  border-bottom: 1px solid var(--faint);
+  position: relative; overflow: hidden;
+}
+/* gradient wash behind avatar */
+.profile-hero::before {
+  content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(232,96,138,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.profile-hero::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+}
+.prof-av-wrap { position: relative; margin-bottom: 11px; z-index: 1; }
+.prof-av {
+  width: 70px; height: 70px; border-radius: 20px;
+  background: var(--bg3); display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 2px var(--rose), 0 0 24px rgba(232,96,138,0.2);
+}
+.prof-pro {
+  position: absolute; bottom: -5px; right: -5px;
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  color: white; font-size: 8px; font-weight: 700; font-family: var(--mono);
+  padding: 2px 7px; border-radius: 8px; border: 2px solid var(--bg); letter-spacing: 0.06em;
+}
+.prof-name {
+  font-family: var(--mono); font-size: 18px; font-weight: 600;
+  color: var(--text); margin-bottom: 2px; letter-spacing: 0.06em; z-index: 1;
+}
+.prof-joined { font-size: 10px; color: var(--muted); font-family: var(--mono); margin-bottom: 13px; z-index: 1; }
+.prof-away-box {
+  background: var(--bg2); border: 1px solid var(--faint);
+  border-radius: 14px; padding: 11px 14px; text-align: left; width: 100%;
+  position: relative; overflow: hidden; z-index: 1;
+}
+.prof-away-box::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--rose), var(--gold));
+}
+.prof-away-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); margin-bottom: 5px; font-family: var(--mono); margin-left: 6px; }
+.prof-away-text { font-size: 12px; color: var(--text); font-style: italic; font-weight: 300; line-height: 1.5; margin-left: 6px; }
+
+.stat-row { display: flex; border-bottom: 1px solid var(--faint); }
+.stat { flex: 1; padding: 13px 0; text-align: center; border-right: 1px solid var(--faint); }
+.stat:last-child { border-right: none; }
+.stat-val { font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.stat-label { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; font-family: var(--mono); }
+
+.prof-row {
+  display: flex; align-items: center; gap: 12px; padding: 13px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer; transition: background 0.12s;
+}
+.prof-row:hover { background: var(--bg2); }
+.prof-row-ico {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: var(--bg3); border: 1px solid var(--faint);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.prof-row-lbl { flex: 1; font-size: 13px; color: var(--text); font-weight: 300; }
+.prof-row-val { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+.rose-val { color: var(--rose) !important; }
+
+/* ─── TAB BAR ─── */
+.tab-bar {
+  display: flex; border-top: 1px solid var(--faint);
+  background: var(--bg); padding-bottom: 14px;
+  position: relative;
+}
+.tab-bar::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+  opacity: 0.4;
+}
+.tab-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 10px 0 0; gap: 3px; cursor: pointer; border: none; background: none;
+}
+.tab-ico { font-size: 19px; line-height: 1; }
+.tab-lbl { font-size: 9px; font-family: var(--mono); letter-spacing: 0.04em; color: var(--muted); }
+.tab-item.active .tab-lbl { color: var(--rose); }
+
+/* ─── DESIGN NOTES ─── */
+.design-notes { margin-top: 36px; max-width: 640px; width: 100%; }
+.notes-header { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; text-align: center; font-family: var(--mono); }
+.note-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.note-card { background: #181310; border: 1px solid #2a2018; border-radius: 12px; padding: 14px; }
+.note-title {
+  font-size: 11px; font-weight: 700; margin-bottom: 5px; font-family: var(--mono); letter-spacing: 0.04em;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.note-body { font-size: 11px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+@media (max-width: 420px) {
+  :root { --phone-w: 340px; --phone-h: 730px; }
+  .note-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="him-logotype">H.I.M.</div>
+  <p>hi, it's me. · v3</p>
+</div>
+
+<div class="screen-nav">
+  <button class="snav-btn active" onclick="go('buddy-list',this)">buddy list</button>
+  <button class="snav-btn" onclick="go('chat',this)">dm chat</button>
+  <button class="snav-btn" onclick="go('rooms',this)">chat rooms</button>
+  <button class="snav-btn" onclick="go('away-editor',this)">away message</button>
+  <button class="snav-btn" onclick="go('profile',this)">profile</button>
+</div>
+
+<div class="phone-wrap">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="status-bar">
+  <span class="status-time">9:41</span>
+  <div class="status-icons"><span>●●●</span><span style="margin:0 3px">WiFi</span><span>🔋</span></div>
+</div>
+
+<!-- ═══ BUDDY LIST ═══ -->
+<div class="screen active" id="screen-buddy-list">
+  <div class="app-header">
+    <div>
+      <div class="app-title">H.I.M.<span class="online-pip"></span></div>
+      <div class="app-sub">8 online · 3 away</div>
+    </div>
+    <button class="header-btn">✦</button>
+  </div>
+
+  <div class="screen-body">
+    <div class="my-status">
+      <div class="my-status-label">your away message</div>
+      <div class="my-status-text">"cooking something desi and pretending my apartment doesn't smell like a dhaba right now"</div>
+      <div class="my-status-chips">
+        <button class="chip chip-rose" onclick="go('away-editor',document.querySelector('.snav-btn:nth-child(4)'))">edit</button>
+        <button class="chip chip-green">● online</button>
+        <button class="chip chip-ghost">set away</button>
+      </div>
+    </div>
+
+    <div class="section-label rose">online</div>
+
+    <div class="buddy-card" onclick="go('chat',document.querySelector('.snav-btn:nth-child(2)'))">
+      <div class="avatar has-unread">🌙<div class="sdot online"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">midnightchai</div>
+        <div class="buddy-away">"halfway through season 3, no spoilers or i will actually block you"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">now</span><div class="unread">2</div></div>
+    </div>
+
+    <div class="buddy-card">
+      <div class="avatar">🎸<div class="sdot online"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">velvetjukebox</div>
+        <div class="buddy-away">"at the gym pretending i know what i'm doing"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">4m</span></div>
+    </div>
+
+    <div class="buddy-card">
+      <div class="avatar">🌿<div class="sdot online"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">quietstorms_</div>
+        <div class="buddy-away">"working from home which means working from couch"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">1h</span></div>
+    </div>
+
+    <div class="buddy-card">
+      <div class="avatar">🎬<div class="sdot online"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">celluloidboy</div>
+        <div class="buddy-away">"rewatching everything Wong Kar-wai ever made, no notes"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">2h</span></div>
+    </div>
+
+    <div class="section-label gold">away</div>
+
+    <div class="buddy-card">
+      <div class="avatar">☕<div class="sdot away"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">sundaycoffee99</div>
+        <div class="buddy-away">"technically here, emotionally somewhere in 2006"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">15m</span></div>
+    </div>
+
+    <div class="buddy-card">
+      <div class="avatar">🌊<div class="sdot idle"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">tidepoolkid</div>
+        <div class="buddy-away">"trying to figure out if i'm an introvert or just tired"</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">4h</span></div>
+    </div>
+
+    <div class="section-label muted">offline</div>
+
+    <div class="buddy-card">
+      <div class="avatar">🦋<div class="sdot offline"></div></div>
+      <div class="buddy-info">
+        <div class="buddy-name">mothdust</div>
+        <div class="buddy-away" style="font-style:normal;font-size:11px;">last seen yesterday</div>
+      </div>
+      <div class="buddy-meta"><span class="buddy-time">1d</span></div>
+    </div>
+    <div style="height:20px"></div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-item active"><span class="tab-ico">◉</span><span class="tab-lbl">buddies</span></button>
+    <button class="tab-item" onclick="go('rooms',document.querySelector('.snav-btn:nth-child(3)'))"><span class="tab-ico">◎</span><span class="tab-lbl">rooms</span></button>
+    <button class="tab-item"><span class="tab-ico">◈</span><span class="tab-lbl">requests</span></button>
+    <button class="tab-item" onclick="go('profile',document.querySelector('.snav-btn:nth-child(5)'))"><span class="tab-ico">◻</span><span class="tab-lbl">me</span></button>
+  </div>
+</div>
+
+<!-- ═══ CHAT ═══ -->
+<div class="screen" id="screen-chat">
+  <div class="chat-header">
+    <button class="back" onclick="go('buddy-list',document.querySelector('.snav-btn:nth-child(1)'))">‹</button>
+    <div class="chat-hinfo">
+      <div class="chat-hname">midnightchai</div>
+      <div class="chat-hstatus">● online now</div>
+      <div class="chat-haway">"halfway through season 3, no spoilers or i will actually block you"</div>
+    </div>
+    <div class="chat-havatar">🌙</div>
+  </div>
+  <div class="chat-messages screen-body">
+    <div class="chat-date">today</div>
+    <div class="msg-row them"><div class="msg-name">midnightchai</div><div class="msg-bub">ok wait are you actually cooking or did you order uber eats and lie about it</div><div class="msg-time">9:02 PM</div></div>
+    <div class="msg-row me"><div class="msg-bub">i am ACTUALLY cooking</div><div class="msg-time">9:04 PM</div></div>
+    <div class="msg-row me"><div class="msg-bub">chicken karahi. from scratch. including grinding the spices which is a whole thing</div><div class="msg-time">9:04 PM</div></div>
+    <div class="msg-row them"><div class="msg-name">midnightchai</div><div class="msg-bub">ok that's actually impressive. i had cereal for dinner so</div><div class="msg-time">9:06 PM</div></div>
+    <div class="msg-row them"><div class="msg-name">midnightchai</div><div class="msg-bub">also how is it that you're single</div><div class="msg-time">9:06 PM</div></div>
+    <div class="msg-row me"><div class="msg-bub">lmaoo i cook for myself and my couch</div><div class="msg-time">9:08 PM</div></div>
+    <div class="msg-row me"><div class="msg-bub">the couch doesn't complain</div><div class="msg-time">9:08 PM</div></div>
+    <div class="msg-row them"><div class="msg-name">midnightchai</div><div class="msg-bub">honestly healthy relationship tbh</div><div class="msg-time">9:09 PM</div></div>
+  </div>
+  <div class="chat-input-bar">
+    <input class="chat-inp" placeholder="message midnightchai...">
+    <button class="send-btn">↑</button>
+  </div>
+</div>
+
+<!-- ═══ ROOMS ═══ -->
+<div class="screen" id="screen-rooms">
+  <div class="app-header">
+    <div>
+      <div class="app-title" style="font-size:15px;letter-spacing:0.06em;">chat rooms</div>
+      <div class="app-sub">find your people</div>
+    </div>
+    <button class="header-btn">+</button>
+  </div>
+  <div class="screen-body">
+    <div class="room-filters">
+      <button class="rf-chip on">all</button>
+      <button class="rf-chip off">my city</button>
+      <button class="rf-chip off">30s</button>
+      <button class="rf-chip off">single</button>
+      <button class="rf-chip off">divorced</button>
+      <button class="rf-chip off">food</button>
+      <button class="rf-chip off">film</button>
+      <button class="rf-chip off">books</button>
+    </div>
+
+    <div class="section-label rose">active now</div>
+
+    <div class="room-card live">
+      <div class="room-top"><div class="room-name">late night cooking</div><div class="room-live-pill"><div class="live-dot"></div>14</div></div>
+      <div class="room-last">velvetjukebox: wait you add the whole cardamom pod?</div>
+      <div class="room-tags"><span class="rtag rtag-rose">food</span><span class="rtag rtag-ghost">all ages</span></div>
+    </div>
+
+    <div class="room-card live">
+      <div class="room-top"><div class="room-name">movies we pretend to have seen</div><div class="room-live-pill"><div class="live-dot"></div>9</div></div>
+      <div class="room-last">celluloidboy: ok but 2046 is genuinely his best</div>
+      <div class="room-tags"><span class="rtag rtag-lav">film</span><span class="rtag rtag-rose">chaotic</span></div>
+    </div>
+
+    <div class="room-card live">
+      <div class="room-top"><div class="room-name">orlando gays</div><div class="room-live-pill"><div class="live-dot"></div>27</div></div>
+      <div class="room-last">quietstorms_: anyone going to the thing saturday?</div>
+      <div class="room-tags"><span class="rtag rtag-sky">orlando</span><span class="rtag rtag-ghost">local</span></div>
+    </div>
+
+    <div class="room-card live">
+      <div class="room-top"><div class="room-name">working from couch club</div><div class="room-live-pill"><div class="live-dot"></div>33</div></div>
+      <div class="room-last">sundaycoffee99: my third meeting and i haven't moved</div>
+      <div class="room-tags"><span class="rtag rtag-gold">relatable</span></div>
+    </div>
+
+    <div class="section-label muted">browse</div>
+
+    <div class="room-card">
+      <div class="room-top"><div class="room-name">30s club (no explaining required)</div><div class="room-count-pill">41</div></div>
+      <div class="room-tags" style="margin-top:5px"><span class="rtag rtag-gold">30s</span><span class="rtag rtag-rose">single</span></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-top"><div class="room-name">divorced and thriving (theoretically)</div><div class="room-count-pill">27</div></div>
+      <div class="room-tags" style="margin-top:5px"><span class="rtag rtag-gold">30s</span><span class="rtag rtag-lav">honest</span></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-top"><div class="room-name">gay men who actually cook</div><div class="room-count-pill">18</div></div>
+      <div class="room-tags" style="margin-top:5px"><span class="rtag rtag-rose">food</span></div>
+    </div>
+    <div style="height:20px"></div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-item" onclick="go('buddy-list',document.querySelector('.snav-btn:nth-child(1)'))"><span class="tab-ico">◉</span><span class="tab-lbl">buddies</span></button>
+    <button class="tab-item active"><span class="tab-ico">◎</span><span class="tab-lbl">rooms</span></button>
+    <button class="tab-item"><span class="tab-ico">◈</span><span class="tab-lbl">requests</span></button>
+    <button class="tab-item" onclick="go('profile',document.querySelector('.snav-btn:nth-child(5)'))"><span class="tab-ico">◻</span><span class="tab-lbl">me</span></button>
+  </div>
+</div>
+
+<!-- ═══ AWAY EDITOR ═══ -->
+<div class="screen" id="screen-away-editor">
+  <div class="app-header">
+    <div>
+      <div class="app-title" style="font-size:15px;letter-spacing:0.06em;">away message</div>
+      <div class="app-sub">say something real</div>
+    </div>
+    <button class="header-btn" onclick="go('buddy-list',document.querySelector('.snav-btn:nth-child(1)'))">✓</button>
+  </div>
+  <div class="away-editor">
+    <div>
+      <div class="away-field-label">your vibe right now</div>
+      <div class="mood-row">
+        <button class="mood-btn" onclick="setMood(this)"><span class="mood-icon">😭</span><span class="mood-label">chaotic</span></button>
+        <button class="mood-btn active" onclick="setMood(this)"><span class="mood-icon">🫠</span><span class="mood-label">honest</span></button>
+        <button class="mood-btn" onclick="setMood(this)"><span class="mood-icon">📵</span><span class="mood-label">busy</span></button>
+        <button class="mood-btn" onclick="setMood(this)"><span class="mood-icon">🛋️</span><span class="mood-label">cozy</span></button>
+        <button class="mood-btn" onclick="setMood(this)"><span class="mood-icon">🚶</span><span class="mood-label">out</span></button>
+      </div>
+    </div>
+    <div>
+      <div class="away-field-label">write it</div>
+      <textarea class="away-textarea" id="away-input" oninput="updateAway()" placeholder="what's going on with you right now...">"cooking something desi and pretending my apartment doesn't smell like a dhaba right now"</textarea>
+      <div class="away-char-row"><span class="away-char-hint">keep it honest</span><span class="away-char-count"><span id="away-count">87</span>/140</span></div>
+    </div>
+    <div>
+      <div class="away-field-label">how it looks</div>
+      <div class="away-preview">
+        <div class="preview-label">preview</div>
+        <div class="prev-row">
+          <div class="prev-av">🌶<div class="prev-dot"></div></div>
+          <div class="prev-info">
+            <div class="prev-name">spicyriceboy</div>
+            <div class="prev-away" id="preview-text">"cooking something desi and pretending my apartment doesn't smell like a dhaba right now"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="preset-label">need a starting point?</div>
+      <button class="away-preset" onclick="usePreset(this)">"at the gym, probably regretting this decision"</button>
+      <button class="away-preset" onclick="usePreset(this)">"technically available, emotionally somewhere else"</button>
+      <button class="away-preset" onclick="usePreset(this)">"cooking. don't talk to me until there is food"</button>
+      <button class="away-preset" onclick="usePreset(this)">"do not disturb unless you are bringing snacks"</button>
+    </div>
+    <button class="save-btn" onclick="go('buddy-list',document.querySelector('.snav-btn:nth-child(1)'))">save away message</button>
+    <div style="height:8px"></div>
+  </div>
+</div>
+
+<!-- ═══ PROFILE ═══ -->
+<div class="screen" id="screen-profile">
+  <div class="app-header">
+    <div><div class="app-title" style="font-size:15px;letter-spacing:0.06em;">profile</div></div>
+    <button class="header-btn">⋯</button>
+  </div>
+  <div class="screen-body">
+    <div class="profile-hero">
+      <div class="prof-av-wrap">
+        <div class="prof-av">🌶</div>
+        <div class="prof-pro">PRO</div>
+      </div>
+      <div class="prof-name">spicyriceboy</div>
+      <div class="prof-joined">member since april 2025</div>
+      <div class="prof-away-box">
+        <div class="prof-away-label">away message</div>
+        <div class="prof-away-text">"cooking something desi and pretending my apartment doesn't smell like a dhaba right now"</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val">24</div><div class="stat-label">buddies</div></div>
+      <div class="stat"><div class="stat-val">7</div><div class="stat-label">rooms</div></div>
+      <div class="stat"><div class="stat-val">143</div><div class="stat-label">days</div></div>
+    </div>
+    <div class="prof-row" onclick="go('away-editor',document.querySelector('.snav-btn:nth-child(4)'))">
+      <div class="prof-row-ico">✐</div><div class="prof-row-lbl">Edit away message</div><div class="prof-row-val">›</div>
+    </div>
+    <div class="prof-row">
+      <div class="prof-row-ico">✦</div><div class="prof-row-lbl">Change buddy icon</div><div class="prof-row-val">›</div>
+    </div>
+    <div class="prof-row">
+      <div class="prof-row-ico">◈</div><div class="prof-row-lbl">Screenname</div>
+      <div class="prof-row-val" style="font-family:var(--mono);font-size:11px;">spicyriceboy</div>
+    </div>
+    <div class="prof-row">
+      <div class="prof-row-ico">⬡</div><div class="prof-row-lbl">H.I.M. Pro</div>
+      <div class="prof-row-val rose-val">active ✓</div>
+    </div>
+    <div class="prof-row">
+      <div class="prof-row-ico">🔕</div><div class="prof-row-lbl">Notifications</div><div class="prof-row-val">›</div>
+    </div>
+    <div class="prof-row">
+      <div class="prof-row-ico">🔒</div><div class="prof-row-lbl">Privacy & blocking</div><div class="prof-row-val">›</div>
+    </div>
+    <div style="height:20px"></div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-item" onclick="go('buddy-list',document.querySelector('.snav-btn:nth-child(1)'))"><span class="tab-ico">◉</span><span class="tab-lbl">buddies</span></button>
+    <button class="tab-item" onclick="go('rooms',document.querySelector('.snav-btn:nth-child(3)'))"><span class="tab-ico">◎</span><span class="tab-lbl">rooms</span></button>
+    <button class="tab-item"><span class="tab-ico">◈</span><span class="tab-lbl">requests</span></button>
+    <button class="tab-item active"><span class="tab-ico">◻</span><span class="tab-lbl">me</span></button>
+  </div>
+</div>
+
+</div><!-- phone-frame -->
+</div><!-- phone-wrap -->
+
+<div class="design-notes">
+  <div class="notes-header">the v3 DNA</div>
+  <div class="note-grid">
+    <div class="note-card">
+      <div class="note-title">Rose + gold, not just amber</div>
+      <div class="note-body">Rose (#E8608A) as the primary accent. Warm, saturated, unapologetic. Not pink-for-the-sake-of-it — it's intentional and it earns its place against the dark base.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">Gradient as a signature</div>
+      <div class="note-body">Rose to lavender to gold runs across every header bar, the logotype, the send button, the Pro badge, the away message accent. One consistent gradient that reads as the brand.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">Nunito replaces Lato</div>
+      <div class="note-body">Slightly rounded letterforms — warmer, more expressive, less corporate. Still clean and readable. The difference is subtle but it changes the feeling of every label and button.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">Rose as the active state</div>
+      <div class="note-body">Unread badges, active filters, selected chips, the send button, section labels — all rose. The color communicates "this is live, this matters" throughout.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">Profile glow</div>
+      <div class="note-body">Rose radial gradient wash behind the avatar on the profile screen. Subtle, warm, a little theatrical. The profile should feel like a moment, not a settings page.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">What doesn't change</div>
+      <div class="note-body">IBM Plex Mono for all screennames. No photos. AIM status dots with glow. The product's DNA is still AIM nostalgia — the rose layer adds the gay identity on top of it.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  if (btn) {
+    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+function updateAway() {
+  const v = document.getElementById('away-input').value;
+  document.getElementById('away-count').textContent = v.length;
+  document.getElementById('preview-text').textContent = v || 'your away message will appear here';
+}
+function usePreset(btn) {
+  const t = '"' + btn.textContent.replace(/^"|"$/g,'') + '"';
+  document.getElementById('away-input').value = t;
+  updateAway();
+}
+function setMood(btn) {
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
