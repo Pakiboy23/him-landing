@@ -257,24 +257,29 @@ h1 {
   var btn = document.getElementById('openAppBtn');
   var statusMsg = document.getElementById('statusMsg');
 
-  btn.href = deepLink;
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
+  if (!isMobile) {
+    // Desktop: go straight to the web app.
+    btn.href = webFallback;
+  } else {
+    // Mobile: try native app first, surface store links if not installed.
+    btn.href = deepLink;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
 
-    // Try the custom scheme; if not installed the browser will do nothing or show an error.
-    // We fall back to the web app after a short delay.
-    var fallbackTimer = setTimeout(function () {
-      statusMsg.textContent = "Looks like H.I.M. isn't installed. Download it below to join.";
-    }, 1800);
+      var fallbackTimer = setTimeout(function () {
+        statusMsg.textContent = "Looks like H.I.M. isn't installed. Download it below to join.";
+      }, 1800);
 
-    window.addEventListener('blur', function onBlur() {
-      clearTimeout(fallbackTimer);
-      window.removeEventListener('blur', onBlur);
-    }, { once: true });
+      window.addEventListener('blur', function onBlur() {
+        clearTimeout(fallbackTimer);
+        window.removeEventListener('blur', onBlur);
+      }, { once: true });
 
-    window.location.href = deepLink;
-  });
+      window.location.href = deepLink;
+    });
+  }
 
   // TestFlight link is static — no patching needed.
 })();
