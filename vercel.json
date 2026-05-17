@@ -3,6 +3,10 @@
     {
       "source": "/join/:inviteCode",
       "destination": "/join.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
     }
   ],
   "headers": [
