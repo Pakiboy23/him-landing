@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How H.I.M. collects, uses, and protects your data.">
+<meta property="og:title" content="Privacy Policy — H.I.M.">
+<meta property="og:description" content="How H.I.M. collects, uses, and protects your data.">
+<meta property="og:url" content="https://www.hiitsme.app/privacy">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hiitsme.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy — H.I.M.">
+<meta name="twitter:description" content="How H.I.M. collects, uses, and protects your data.">
+<meta name="twitter:image" content="https://www.hiitsme.app/og-image.png">
+<title>Privacy Policy — H.I.M.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #13100E;
+  --bg-card: #1D1916;
+  --text: #F7F0E8;
+  --text-muted: #BEB2A5;
+  --text-muted-soft: #9C8E82;
+  --rose: #E8608A;
+  --gold: #D4963A;
+  --border: rgba(255,255,255,0.07);
+  --rose-glow: rgba(232,96,138,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);
+  top: 20%;
+  left: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* nav */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(19,16,14,0.95) 60%, transparent);
+}
+
+.wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.wordmark span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-muted-soft);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: -2px;
+}
+
+.nav-cta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--rose);
+  background: var(--rose-glow);
+  border: 1px solid rgba(232,96,138,0.25);
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover {
+  background: rgba(232,96,138,0.18);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 100px 24px 96px;
+}
+
+/* back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted-soft);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+.back-link:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+.back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* page header */
+.page-header {
+  margin-top: 32px;
+}
+
+.page-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-top: 16px;
+  letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted-soft);
+  margin-top: 10px;
+}
+
+/* content */
+.content {
+  margin-top: 48px;
+}
+
+.content-section {
+  margin-bottom: 40px;
+}
+
+.content-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.section-heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.content-text {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.content-text p {
+  margin-bottom: 14px;
+}
+
+.content-text p:last-child {
+  margin-bottom: 0;
+}
+
+.content-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.content-text ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content-text ul li {
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.content-text ul li:last-child {
+  margin-bottom: 0;
+}
+
+.content-text ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted-soft);
+}
+
+.content-text a {
+  color: var(--rose);
+  text-decoration: none;
+}
+
+.content-text a:hover {
+  text-decoration: underline;
+}
+
+/* divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 40px 0;
+}
+
+/* footer */
+.page-footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted-soft);
+  opacity: 0.5;
+}
+
+.page-footer a {
+  color: var(--text-muted-soft);
+  text-decoration: none;
+}
+
+.page-footer a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .container {
+    padding: 88px 20px 80px;
+    max-width: 680px;
+  }
+  .page-header {
+    margin-top: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="orb"></div>
+
+<nav>
+  <a href="/" class="wordmark">
+    H.I.M.
+    <span>hi, it's me</span>
+  </a>
+  <a href="/#form-row" class="nav-cta">Early access</a>
+</nav>
+
+<div class="container">
+
+  <a href="/" class="back-link">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 13 5 8l5-5"/>
+    </svg>
+    Back to H.I.M.
+  </a>
+
+  <header class="page-header">
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="page-subtitle">Effective: May 17, 2026</p>
+  </header>
+
+  <div class="content">
+
+    <section class="content-section">
+      <h2 class="section-heading">Who we are</h2>
+      <div class="content-text">
+        <p>H.I.M. (Hi, It's Me) is a friendship-first messaging app for gay men. It is operated by Haaris Shariff. If you have questions about this policy, email <a href="mailto:support@hiitsme.app">support@hiitsme.app</a>.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">What we collect</h2>
+      <div class="content-text">
+        <ul>
+          <li><strong>Account info</strong> — the screenname you choose. An email address only if you add one for password reset; it is not required.</li>
+          <li><strong>Messages</strong> — your DMs and room messages are stored to deliver them to recipients.</li>
+          <li><strong>Device tokens</strong> — push notification tokens used to deliver alerts to your device.</li>
+          <li><strong>Usage data</strong> — when you joined rooms, last active timestamps.</li>
+          <li><strong>Reports &amp; blocks</strong> — if you report or block another user, we store that action.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">What we don't collect</h2>
+      <div class="content-text">
+        <p>We don't collect your real name, location, phone number, or payment information. H.I.M. is free.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">How we use your data</h2>
+      <div class="content-text">
+        <ul>
+          <li>To operate the messaging service and deliver your messages.</li>
+          <li>To send push notifications you've opted into.</li>
+          <li>To enforce community safety through our block/report system and content moderation.</li>
+          <li>To let you reset your password if you've added an email address.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Who we share data with</h2>
+      <div class="content-text">
+        <ul>
+          <li><strong>Supabase</strong> (<a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>) — database and authentication infrastructure. Data is stored in the US.</li>
+          <li><strong>Apple APNs / Google FCM</strong> — push notification delivery. Only your device token and notification content are transmitted.</li>
+          <li><strong>Vercel</strong> (<a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a>) — web hosting. No personal data is stored by Vercel.</li>
+        </ul>
+        <p style="margin-top: 14px;">We do not sell your data to advertisers or third parties.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Data retention</h2>
+      <div class="content-text">
+        <p>Your data is kept for as long as your account is active. You can delete your account at any time from the Account page in the app — this permanently erases your profile, messages, and all associated data.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Your rights</h2>
+      <div class="content-text">
+        <p>You can update your email or password from the Account page in the app. You can delete your account entirely — this action is irreversible. To request a data export or ask questions, email <a href="mailto:support@hiitsme.app">support@hiitsme.app</a>.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Children</h2>
+      <div class="content-text">
+        <p>H.I.M. is not intended for users under 18. If you are under 18, do not use the app.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Changes to this policy</h2>
+      <div class="content-text">
+        <p>We'll update this page if our practices change. Continued use of H.I.M. after changes are posted means you accept the updated policy.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="content-section">
+      <h2 class="section-heading">Contact</h2>
+      <div class="content-text">
+        <p><a href="mailto:support@hiitsme.app">support@hiitsme.app</a></p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <a href="/">H.I.M.</a> &middot; <a href="/why">Our story</a> &middot; <a href="/terms">Terms</a> &middot; &copy; 2025 Saman Technologies LLC
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H.I.M.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #13100E;
+  --bg-card: #1D1916;
+  --text: #F7F0E8;
+  --text-muted: #BEB2A5;
+  --text-muted-soft: #9C8E82;
+  --rose: #E8608A;
+  --border: rgba(255,255,255,0.07);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 320px;
+  margin-bottom: 2rem;
+}
+a.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+a.btn:hover { opacity: 0.88; }
+</style>
+</head>
+<body>
+<div class="wordmark">H.I.M.</div>
+<h1>This link opens in the app.</h1>
+<p>Room invite links only work inside H.I.M. Don't have it yet?</p>
+<a href="https://testflight.apple.com/join/FuzzYf1A" class="btn" target="_blank" rel="noopener">Get H.I.M. on TestFlight</a>
+</body>
+</html>
