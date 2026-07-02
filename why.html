@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1A1F3A">
 <meta name="description" content="Why Haaris built H.I.M. — a community-first social app that brings back screennames, away messages, buddy lists, and chat rooms.">
 <meta property="og:title" content="Why H.I.M. Exists — From the Founder">
-<meta property="og:description" content="Most social apps are built around appearances and speed. H.I.M. was built for something different: real friendship and community. Now on the App Store.">
+<meta property="og:description" content="Most social apps are built around appearances and speed. H.I.M. was built for something different: real friendship and community. Now on iOS and the web.">
 <meta property="og:url" content="https://www.hiitsme.app/why.html">
 <meta property="og:type" content="website">
 <!-- TODO: Add og-image.png (1200×630px) to root and uncomment -->
 <meta property="og:image" content="https://www.hiitsme.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Why H.I.M. Exists — From the Founder">
-<meta name="twitter:description" content="Most social apps are built around appearances and speed. H.I.M. was built for something different: real friendship and community. Now on the App Store.">
+<meta name="twitter:description" content="Most social apps are built around appearances and speed. H.I.M. was built for something different: real friendship and community. Now on iOS and the web.">
 <meta name="twitter:image" content="https://www.hiitsme.app/og-image.png">
 <meta name="apple-itunes-app" content="app-id=6761863631">
 <title>Why H.I.M. Exists</title>
@@ -21,24 +22,25 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #13100E;
-  --bg2:     #1D1916;
-  --bg3:     #27221E;
-  --text:    #F7F0E8;
-  --muted:   #9C8E82;
-  --faint:   #3A3028;
+  --bg:      #0F1424;
+  --bg2:     #151A30;
+  --bg3:     #1A1F3A;
+  --text:    #F2E6D0;
+  --muted:   #8C8FAA;
+  --faint:   #2A2F45;
 
-  --rose:      #E8608A;
-  --rose-dim:  rgba(232,96,138,0.12);
-  --rose-brd:  rgba(232,96,138,0.28);
-  --gold:      #D4963A;
+  --chiraag:        #E8A23A;
+  --chiraag-strong: #C8861F;
+  --chiraag-glow:   #F5C56A;
+  --chiraag-dim:    rgba(232,162,58,0.12);
+  --chiraag-brd:    rgba(232,162,58,0.28);
+
   --green:     #4EC97A;
   --green-bg:  rgba(78,201,122,0.10);
-  --lavender:  #A78BFA;
 
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'Nunito', sans-serif;
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(242,230,208,0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,7 +67,7 @@ body::after {
   position: fixed;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, var(--rose-dim) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--chiraag-dim) 0%, transparent 70%);
   top: 20%;
   left: -100px;
   pointer-events: none;
@@ -73,7 +75,7 @@ body::after {
 }
 
 .grad-text {
-  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  background: linear-gradient(135deg, var(--chiraag) 0%, var(--chiraag-strong) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -88,22 +90,23 @@ nav {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: linear-gradient(to bottom, rgba(19,16,14,0.95) 60%, transparent);
+  background: linear-gradient(to bottom, rgba(15,20,36,0.95) 60%, transparent);
 }
 
 .wordmark {
   font-family: var(--mono);
   font-size: 19px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-decoration: none;
 }
 
 .wordmark .mark {
-  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  background: linear-gradient(135deg, var(--chiraag) 0%, var(--chiraag-strong) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 18px rgba(232,162,58,0.22);
 }
 
 .wordmark span.sub {
@@ -119,9 +122,9 @@ nav {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  color: var(--rose);
-  background: var(--rose-dim);
-  border: 1px solid var(--rose-brd);
+  color: var(--chiraag);
+  background: var(--chiraag-dim);
+  border: 1px solid var(--chiraag-brd);
   padding: 6px 14px;
   border-radius: 20px;
   letter-spacing: 0.04em;
@@ -129,7 +132,7 @@ nav {
   transition: background 0.2s;
 }
 
-.nav-cta:hover { background: rgba(232,96,138,0.18); }
+.nav-cta:hover { background: rgba(232,162,58,0.18); }
 
 .container {
   position: relative;
@@ -150,13 +153,13 @@ nav {
   color: var(--muted);
   text-decoration: none;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.03);
+  background: rgba(242,230,208,0.03);
   padding: 8px 16px;
   border-radius: 20px;
   transition: background 0.2s, color 0.2s;
 }
 .back-link:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(242,230,208,0.06);
   color: var(--text);
 }
 .back-link svg { width: 14px; height: 14px; }
@@ -170,7 +173,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--chiraag);
 }
 
 .page-title {
@@ -195,7 +198,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--chiraag);
   margin-bottom: 16px;
 }
 
@@ -264,10 +267,10 @@ nav {
 .cta-card::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+  background: linear-gradient(90deg, var(--chiraag-glow) 0%, var(--chiraag) 50%, var(--chiraag-strong) 100%);
 }
 
-.cta-card:hover { border-color: var(--rose-brd); }
+.cta-card:hover { border-color: var(--chiraag-brd); }
 
 .cta-title {
   font-family: var(--mono);
@@ -278,25 +281,52 @@ nav {
   letter-spacing: 0.02em;
 }
 
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .store-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
-  color: #fff;
+  background: linear-gradient(135deg, var(--chiraag) 0%, var(--chiraag-strong) 100%);
+  color: var(--bg);
   text-decoration: none;
   border-radius: 16px;
   padding: 14px 28px;
-  box-shadow: 0 6px 24px rgba(232,96,138,0.3);
+  box-shadow: 0 6px 24px rgba(232,162,58,0.3);
   transition: opacity 0.2s, box-shadow 0.2s, transform 0.1s;
 }
 
-.store-btn:hover { opacity: 0.92; box-shadow: 0 8px 28px rgba(232,96,138,0.4); }
+.store-btn:hover { opacity: 0.92; box-shadow: 0 8px 28px rgba(232,162,58,0.4); }
 .store-btn:active { transform: scale(0.98); }
 .store-btn svg { width: 22px; height: 26px; flex-shrink: 0; }
 .store-btn .lines { text-align: left; }
-.store-btn .small { display: block; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; font-family: var(--mono); }
+.store-btn .small { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; font-family: var(--mono); }
 .store-btn .big { display: block; font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
+
+.web-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--chiraag);
+  background: var(--chiraag-dim);
+  border: 1px solid var(--chiraag-brd);
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 14px 24px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.web-btn:hover { background: rgba(232,162,58,0.18); box-shadow: 0 4px 18px rgba(232,162,58,0.15); }
+.web-btn:active { transform: scale(0.98); }
 
 .cta-note {
   font-family: var(--mono);
@@ -315,7 +345,7 @@ nav {
   text-align: center;
   font-size: 13px;
   color: var(--muted);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 @media (max-width: 640px) {
@@ -399,24 +429,27 @@ nav {
     </div>
 
     <!-- Transition + CTA -->
-    <p class="cta-transition">If this sounds like what you've been looking for, it's live now.</p>
+    <p class="cta-transition">If this sounds like what you've been looking for, it's live now — on iOS and in your browser.</p>
 
     <div class="cta-card">
-      <div class="cta-title">get H.I.M. on the App Store</div>
-      <a class="store-btn" href="https://apps.apple.com/us/app/h-i-m/id6761863631" target="_blank" rel="noopener">
-        <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-        <span class="lines">
-          <span class="small">download on the</span>
-          <span class="big">App Store</span>
-        </span>
-      </a>
-      <p class="cta-note">free · social networking · 18+</p>
+      <div class="cta-title">get H.I.M.</div>
+      <div class="cta-row">
+        <a class="store-btn" href="https://apps.apple.com/us/app/h-i-m/id6761863631" target="_blank" rel="noopener">
+          <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="lines">
+            <span class="small">download on the</span>
+            <span class="big">App Store</span>
+          </span>
+        </a>
+        <a class="web-btn" href="https://hiitsme.app" target="_blank" rel="noopener">open in your browser &rarr;</a>
+      </div>
+      <p class="cta-note">free · ios + web · 18+</p>
     </div>
 
   </div>
 
   <footer class="page-footer">
-    the social internet that felt like home. &middot; hiitsme.app &middot; &copy; 2026 Saman Technologies LLC
+    your screenname, your status, your people. &middot; hiitsme.app &middot; &copy; 2026 Saman Technologies LLC
   </footer>
 
 </div>
