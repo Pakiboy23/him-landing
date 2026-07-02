@@ -9,6 +9,10 @@
       "destination": "/privacy.html"
     },
     {
+      "source": "/why",
+      "destination": "/why.html"
+    },
+    {
       "source": "/terms",
       "destination": "/terms.html"
     }

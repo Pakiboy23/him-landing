@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6761863631">
 <title>H.I.M.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #13100E;
-  --bg-card: #1D1916;
+  --bg2: #1D1916;
   --text: #F7F0E8;
-  --text-muted: #BEB2A5;
-  --text-muted-soft: #9C8E82;
+  --muted: #9C8E82;
   --rose: #E8608A;
+  --gold: #D4963A;
   --border: rgba(255,255,255,0.07);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Nunito', sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--bg); }
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -32,43 +35,56 @@ body {
   text-align: center;
 }
 .wordmark {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 2rem;
 }
 h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.75rem;
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   margin-bottom: 0.75rem;
 }
 p {
   font-size: 0.95rem;
-  color: var(--text-muted);
+  font-weight: 300;
+  color: var(--muted);
   line-height: 1.6;
   max-width: 320px;
   margin-bottom: 2rem;
 }
 a.btn {
-  display: inline-block;
-  padding: 0.75rem 1.75rem;
-  background: var(--rose);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.85rem 1.75rem;
+  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
   color: #fff;
   font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 10px;
+  font-weight: 600;
+  border-radius: 14px;
   text-decoration: none;
+  box-shadow: 0 6px 24px rgba(232,96,138,0.3);
   transition: opacity 0.15s;
 }
-a.btn:hover { opacity: 0.88; }
+a.btn:hover { opacity: 0.9; }
+a.btn svg { width: 18px; height: 22px; flex-shrink: 0; }
 </style>
 </head>
 <body>
 <div class="wordmark">H.I.M.</div>
 <h1>This link opens in the app.</h1>
 <p>Room invite links only work inside H.I.M. Don't have it yet?</p>
-<a href="https://testflight.apple.com/join/FuzzYf1A" class="btn" target="_blank" rel="noopener">Get H.I.M. on TestFlight</a>
+<a href="https://apps.apple.com/us/app/h-i-m/id6761863631" class="btn" target="_blank" rel="noopener">
+  <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+  Get H.I.M. on the App Store
+</a>
 </body>
 </html>

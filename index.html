@@ -3,41 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A social app for gay men built for friendship, conversation, and community. Inspired by screennames, away messages, buddy lists, and chat rooms.">
+<meta name="description" content="H.I.M. (Hi, It's Me) brings back the social internet that felt like home: screennames, away messages, buddy lists, and chat rooms. A community-first space for LGBTQ+ people. Now on the App Store.">
 <meta property="og:title" content="H.I.M. — Hi, It's Me.">
-<meta property="og:description" content="A friendship-first social app for gay men. Not another hookup app. Built for real conversation and community.">
+<meta property="og:description" content="Retro messaging &amp; buddy lists. Screennames, away messages, and chat rooms where real conversations happen. Now on the App Store.">
 <meta property="og:url" content="https://www.hiitsme.app/">
 <meta property="og:type" content="website">
 <!-- TODO: Add og-image.png (1200×630px) to root and uncomment -->
 <meta property="og:image" content="https://www.hiitsme.app/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="H.I.M. — Hi, It's Me.">
-<meta name="twitter:description" content="A friendship-first social app for gay men. Not another hookup app. Built for real conversation and community.">
+<meta name="twitter:description" content="Retro messaging &amp; buddy lists. Screennames, away messages, and chat rooms where real conversations happen. Now on the App Store.">
 <meta name="twitter:image" content="https://www.hiitsme.app/og-image.png">
-<title>H.I.M. — Hi, It's Me.</title>
+<meta name="apple-itunes-app" content="app-id=6761863631">
+<title>H.I.M. — Hi, It's Me. · Retro messaging &amp; buddy lists</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #13100E;
-  --bg-card: #1D1916;
-  --bg-input: #1D1916;
-  --text: #F7F0E8;
-  --text-muted: #BEB2A5;
-  --text-muted-soft: #9C8E82;
-  --rose: #E8608A;
-  --gold: #D4963A;
+  --bg:      #13100E;
+  --bg2:     #1D1916;
+  --bg3:     #27221E;
+  --text:    #F7F0E8;
+  --muted:   #9C8E82;
+  --faint:   #3A3028;
+
+  --rose:      #E8608A;
+  --rose-dim:  rgba(232,96,138,0.12);
+  --rose-brd:  rgba(232,96,138,0.28);
+  --gold:      #D4963A;
+  --gold-dim:  rgba(212,150,58,0.10);
+  --gold-brd:  rgba(212,150,58,0.25);
+
+  --green:     #4EC97A;
+  --green-bg:  rgba(78,201,122,0.10);
+  --lavender:  #A78BFA;
+  --sky:       #60B8E8;
+
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Nunito', sans-serif;
   --border: rgba(255,255,255,0.07);
-  --rose-glow: rgba(232,96,138,0.12);
-  --gold-glow: rgba(212,150,58,0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--bg); scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -56,21 +68,28 @@ body::after {
 
 .glow {
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);
-  top: 40%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, var(--rose-dim) 0%, transparent 70%);
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -60%);
   pointer-events: none;
   z-index: 0;
 }
 
+.grad-text {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* nav */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  padding: 20px 40px;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,33 +98,45 @@ nav {
 }
 
 .wordmark {
-  font-family: 'DM Serif Display', serif;
-  font-size: 20px;
-  color: var(--text);
-  letter-spacing: 0.08em;
+  font-family: var(--mono);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-decoration: none;
 }
 
-.wordmark span {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--text-muted-soft);
+.wordmark .mark {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wordmark span.sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--muted);
   letter-spacing: 0.16em;
-  text-transform: uppercase;
   display: block;
-  margin-top: -2px;
+  margin-top: 0;
 }
 
 .nav-pill {
+  font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
   color: var(--rose);
-  background: var(--rose-glow);
-  border: 1px solid rgba(232,96,138,0.25);
-  padding: 5px 14px;
+  background: var(--rose-dim);
+  border: 1px solid var(--rose-brd);
+  padding: 6px 14px;
   border-radius: 20px;
   letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.2s;
 }
+
+.nav-pill:hover { background: rgba(232,96,138,0.18); }
 
 /* hero */
 .hero {
@@ -115,120 +146,254 @@ nav {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 100px 24px 60px;
+  padding: 110px 24px 60px;
   position: relative;
   z-index: 1;
 }
 
-.hero-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(32px, 6vw, 64px);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--text);
-  max-width: 680px;
-  margin-bottom: 24px;
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--green-bg);
+  border: 1px solid rgba(78,201,122,0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 28px;
   opacity: 0;
-  animation: fadeUp 0.7s ease forwards 0.1s;
+  animation: fadeUp 0.7s ease forwards 0.05s;
 }
 
-.hero-headline em {
-  font-style: italic;
-  background: linear-gradient(135deg, var(--rose), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 7px var(--green);
+  animation: blink 2.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.hero-headline {
+  font-family: var(--mono);
+  font-size: clamp(28px, 5.4vw, 54px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  max-width: 760px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.15s;
 }
 
 .hero-sub {
   font-size: clamp(15px, 2vw, 18px);
   font-weight: 300;
-  color: var(--text-muted);
-  max-width: 520px;
-  line-height: 1.7;
-  margin-bottom: 40px;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 36px;
   opacity: 0;
-  animation: fadeUp 0.7s ease forwards 0.25s;
+  animation: fadeUp 0.7s ease forwards 0.3s;
 }
 
-/* signup form */
-.form-wrap {
-  width: 100%;
-  max-width: 440px;
-  opacity: 0;
-  animation: fadeUp 0.7s ease forwards 0.4s;
-}
+.hero-sub em { color: var(--text); font-style: italic; }
 
-.social-proof {
-  font-size: 0.8rem;
-  color: var(--text-muted-soft);
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.form-row {
+.cta-wrap {
   display: flex;
-  gap: 8px;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 6px 6px 6px 18px;
-  transition: border-color 0.2s;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.45s;
 }
 
-.form-row:focus-within {
-  border-color: rgba(232,96,138,0.35);
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--rose) 0%, #C04875 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 14px 28px;
+  box-shadow: 0 6px 24px rgba(232,96,138,0.3);
+  transition: opacity 0.2s, box-shadow 0.2s, transform 0.1s;
 }
 
-.form-row input {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  color: var(--text);
-  font-weight: 400;
-  min-width: 0;
-}
+.store-btn:hover { opacity: 0.92; box-shadow: 0 8px 28px rgba(232,96,138,0.4); }
+.store-btn:active { transform: scale(0.98); }
 
-.form-row input::placeholder { color: var(--text-muted-soft); opacity: 0.5; }
+.store-btn svg { width: 22px; height: 26px; flex-shrink: 0; }
 
-.form-row button {
-  background: var(--rose);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 22px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s, transform 0.1s;
-}
+.store-btn .lines { text-align: left; }
+.store-btn .small { display: block; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; font-family: var(--mono); }
+.store-btn .big { display: block; font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
 
-.form-row button:hover { opacity: 0.88; }
-.form-row button:active { transform: scale(0.97); }
-
-.form-note {
+.cta-note {
+  font-family: var(--mono);
   font-size: 11px;
-  color: var(--text-muted-soft);
-  margin-top: 10px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+/* app preview */
+.preview-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 56px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.app-window {
+  background: var(--bg);
+  border: 1px solid #2C2420;
+  border-radius: 28px;
+  overflow: hidden;
+  text-align: left;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.7),
+    0 0 60px rgba(232,96,138,0.05) inset;
+}
+
+.app-header {
+  padding: 14px 18px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--faint);
+}
+
+.app-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--lavender) 50%, var(--gold) 100%);
+}
+
+.app-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
+  pointer-events: none;
+}
+
+.app-title {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.online-pip {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 7px var(--green);
+  margin-left: 6px; vertical-align: middle;
+  animation: blink 2.2s ease-in-out infinite;
+}
+
+.app-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
+
+.my-status {
+  margin: 12px 14px;
+  background: linear-gradient(135deg, rgba(232,96,138,0.08) 0%, rgba(212,150,58,0.08) 100%);
+  border: 1px solid rgba(232,96,138,0.2);
+  border-radius: 18px;
+  padding: 13px 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.my-status::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
   opacity: 0.5;
-  text-align: center;
 }
 
-.success-msg {
-  display: none;
-  font-size: 14px;
-  color: var(--gold);
-  font-weight: 500;
-  padding: 14px;
-  text-align: center;
+.my-status-label {
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 7px;
 }
 
-/* problem / solution section */
+.my-status-text {
+  font-size: 12px; color: var(--text);
+  font-style: italic; font-weight: 300; line-height: 1.5;
+}
+
+.section-tag {
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 12px 16px 5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-tag.rose { color: var(--rose); }
+.section-tag.gold { color: var(--gold); }
+.section-tag::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
+
+.buddy-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.buddy-card:last-of-type { border-bottom: none; }
+
+.avatar {
+  width: 40px; height: 40px; border-radius: 13px;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; flex-shrink: 0; position: relative;
+  border: 1px solid var(--faint);
+}
+.avatar.has-unread { border-color: var(--rose); box-shadow: 0 0 8px rgba(232,96,138,0.2); }
+
+.sdot {
+  position: absolute; bottom: -3px; right: -3px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.sdot.online { background: var(--green); box-shadow: 0 0 7px rgba(78,201,122,0.7); }
+.sdot.away   { background: var(--gold); box-shadow: 0 0 7px rgba(212,150,58,0.6); }
+.sdot.idle   { background: var(--lavender); box-shadow: 0 0 5px rgba(167,139,250,0.5); }
+
+.buddy-info { flex: 1; min-width: 0; }
+.buddy-name {
+  font-family: var(--mono);
+  font-size: 12px; font-weight: 500;
+  color: var(--text); margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.buddy-away {
+  font-size: 11px; color: var(--muted);
+  font-weight: 300; font-style: italic; line-height: 1.4;
+}
+.buddy-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+.buddy-time { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.unread {
+  min-width: 18px; height: 18px; border-radius: 9px;
+  background: var(--rose); color: white;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 0 10px rgba(232,96,138,0.4);
+}
+
+/* sections */
 .section {
   width: 100%;
   padding: 80px 24px;
@@ -236,15 +401,13 @@ nav {
   z-index: 1;
 }
 
-.section-inner {
-  max-width: 600px;
-  margin: 0 auto;
-}
+.section-inner { max-width: 640px; margin: 0 auto; }
 
 .section-label {
+  font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--rose);
   margin-bottom: 24px;
@@ -254,63 +417,114 @@ nav {
 .section-body {
   font-size: 16px;
   font-weight: 300;
-  color: var(--text-muted);
+  color: var(--muted);
   line-height: 1.75;
   text-align: center;
 }
 
-.section-body p {
-  margin-bottom: 16px;
-}
-
-.section-body p:last-child {
-  margin-bottom: 0;
-}
+.section-body p { margin-bottom: 16px; }
+.section-body p:last-child { margin-bottom: 0; }
+.section-body em { color: var(--text); font-style: italic; }
 
 /* feature cards */
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
 .feature-card {
-  background: var(--bg-card);
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
   transition: border-color 0.2s;
 }
 
-.feature-card:hover {
-  border-color: rgba(232,96,138,0.2);
+.feature-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.feature-card:hover { border-color: var(--rose-brd); }
+.feature-card:hover::before { opacity: 0.5; }
+
+.feature-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
 }
 
 .feature-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px;
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 600;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
 }
 
 .feature-desc {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 300;
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: var(--muted);
+  line-height: 1.65;
 }
 
-.feature-desc em {
-  font-style: italic;
-  color: var(--text);
-  font-weight: 400;
+.feature-desc em { font-style: italic; color: var(--text); }
+
+/* safety list */
+.safety-list {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
 }
+
+.safety-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: left;
+}
+
+.safety-item:last-child { border-bottom: none; }
+
+.safety-item .tick {
+  font-family: var(--mono);
+  color: var(--green);
+  flex-shrink: 0;
+  font-size: 13px;
+  margin-top: 1px;
+}
+
+.safety-item strong { color: var(--text); font-weight: 600; }
 
 /* why link block */
 .why-link-block {
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
   padding: 48px 24px;
   text-align: center;
@@ -320,29 +534,34 @@ nav {
 }
 
 .why-link-block a {
-  font-size: 15px;
-  font-weight: 400;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
   color: var(--rose);
   text-decoration: none;
+  letter-spacing: 0.02em;
   transition: opacity 0.2s;
-  letter-spacing: 0.01em;
 }
 
-.why-link-block a:hover {
-  opacity: 0.75;
-}
+.why-link-block a:hover { opacity: 0.75; }
 
 /* bottom CTA */
 .bottom-cta {
-  padding: 60px 24px 40px;
+  padding: 60px 24px 72px;
   text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.bottom-cta .section-body {
-  margin-bottom: 32px;
+.bottom-cta h2 {
+  font-family: var(--mono);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
 }
+
+.bottom-cta .section-body { max-width: 480px; margin: 0 auto 32px; }
 
 /* footer */
 footer {
@@ -351,28 +570,37 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   position: relative;
   z-index: 1;
+  flex-wrap: wrap;
 }
 
 .footer-wordmark {
-  font-family: 'DM Serif Display', serif;
-  font-size: 16px;
-  color: var(--text);
-  opacity: 0.6;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0.75;
 }
 
 .footer-tagline {
   font-size: 12px;
-  color: var(--text-muted-soft);
-  opacity: 0.5;
+  color: var(--muted);
+  opacity: 0.6;
   font-style: italic;
 }
 
 .footer-note {
   font-size: 11px;
-  color: var(--text-muted-soft);
-  opacity: 0.4;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.footer-note a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @keyframes fadeUp {
@@ -381,154 +609,183 @@ footer {
 }
 
 @media (max-width: 640px) {
-  nav { padding: 16px 20px; }
-  .hero { padding: 80px 20px 48px; min-height: 100svh; }
-  .hero-headline { font-size: clamp(28px, 7vw, 40px); max-width: 100%; }
-  .hero-sub { margin-bottom: 32px; }
+  nav { padding: 14px 20px; }
+  .hero { padding: 96px 20px 48px; }
   .features { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 8px; text-align: center; }
-  .form-row { flex-direction: column; padding: 10px; border-radius: 16px; }
-  .form-row input { padding: 8px; font-size: 16px; }
-  .form-row button { width: 100%; padding: 14px; border-radius: 10px; min-height: 48px; font-size: 15px; }
+  footer { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="wordmark">
-    H.I.M.
-    <span>hi, it's me</span>
-  </div>
-  <div class="nav-pill">Early access</div>
+  <a class="wordmark" href="index.html">
+    <span class="mark">H.I.M.</span>
+    <span class="sub">hi, it's me</span>
+  </a>
+  <a class="nav-pill" href="https://apps.apple.com/us/app/h-i-m/id6761863631" target="_blank" rel="noopener">Get the app</a>
 </nav>
 
 <div class="glow"></div>
 
 <!-- Hero -->
 <section class="hero">
-  <h1 class="hero-headline">A social app for gay men built for <em>friendship, conversation, and community.</em></h1>
+  <div class="hero-tag"><span class="live-dot"></span>now on the app store</div>
 
-  <p class="hero-sub">Inspired by the parts of the internet that once felt more personal: screennames, away messages, buddy lists, and chat rooms.</p>
+  <h1 class="hero-headline">The social internet that felt like <span class="grad-text">home</span> is back.</h1>
 
-  <div class="form-wrap">
-    <!-- TODO: replace with live count when available -->
-    <p class="social-proof">Spots filling up. Be among the first.</p>
-    <div class="form-row" id="form-row">
-      <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
-      <button onclick="handleSubmit()">Get on the list</button>
+  <p class="hero-sub">A screenname that's yours. An away message that says what you're up to. A buddy list of the people you <em>actually</em> talk to. And chat rooms where real conversations happen.</p>
+
+  <div class="cta-wrap">
+    <a class="store-btn" href="https://apps.apple.com/us/app/h-i-m/id6761863631" target="_blank" rel="noopener">
+      <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="lines">
+        <span class="small">download on the</span>
+        <span class="big">App Store</span>
+      </span>
+    </a>
+    <p class="cta-note">free · social networking · 18+</p>
+  </div>
+
+  <!-- App preview -->
+  <div class="preview-wrap">
+    <div class="app-window">
+      <div class="app-header">
+        <div>
+          <div class="app-title">H.I.M.<span class="online-pip"></span></div>
+          <div class="app-sub">8 online · 3 away</div>
+        </div>
+      </div>
+
+      <div class="my-status">
+        <div class="my-status-label">your away message</div>
+        <div class="my-status-text">"cooking something and pretending my apartment doesn't smell like it"</div>
+      </div>
+
+      <div class="section-tag rose">online</div>
+
+      <div class="buddy-card">
+        <div class="avatar has-unread">🌙<div class="sdot online"></div></div>
+        <div class="buddy-info">
+          <div class="buddy-name">midnightchai</div>
+          <div class="buddy-away">"halfway through season 3, no spoilers or i will actually block you"</div>
+        </div>
+        <div class="buddy-meta"><span class="buddy-time">now</span><div class="unread">2</div></div>
+      </div>
+
+      <div class="buddy-card">
+        <div class="avatar">🎸<div class="sdot online"></div></div>
+        <div class="buddy-info">
+          <div class="buddy-name">velvetjukebox</div>
+          <div class="buddy-away">"at the gym pretending i know what i'm doing"</div>
+        </div>
+        <div class="buddy-meta"><span class="buddy-time">4m</span></div>
+      </div>
+
+      <div class="section-tag gold">away</div>
+
+      <div class="buddy-card">
+        <div class="avatar">☕<div class="sdot away"></div></div>
+        <div class="buddy-info">
+          <div class="buddy-name">sundaycoffee99</div>
+          <div class="buddy-away">"technically here, emotionally somewhere in 2006"</div>
+        </div>
+        <div class="buddy-meta"><span class="buddy-time">15m</span></div>
+      </div>
+
+      <div class="buddy-card">
+        <div class="avatar">🌊<div class="sdot idle"></div></div>
+        <div class="buddy-info">
+          <div class="buddy-name">tidepoolkid</div>
+          <div class="buddy-away">"trying to figure out if i'm an introvert or just tired"</div>
+        </div>
+        <div class="buddy-meta"><span class="buddy-time">4h</span></div>
+      </div>
     </div>
-    <div class="success-msg" id="success-msg">
-      You're on the list. We'll reach out before launch.
-    </div>
-    <p class="form-note">No spam. No nonsense. Just launch updates and early access.</p>
   </div>
 </section>
 
-<!-- Problem / Solution -->
+<!-- What it is -->
 <section class="section">
   <div class="section-inner">
-    <div class="section-label">The gap</div>
+    <div class="section-label">what H.I.M. is</div>
     <div class="section-body">
-      <p>Most apps built for gay men are designed around the same assumptions: appearance, proximity, and speed.</p>
-      <p>That model works for some things. It does not work especially well for friendship.</p>
-      <p>H.I.M. takes a different approach. It creates more space for identity, conversation, and repeat connection.</p>
+      <p>H.I.M. ("Hi, It's Me") is a community-first space for LGBTQ+ people to make friends and stay in touch.</p>
+      <p>It brings back the mechanics that made the early internet feel personal — not for nostalgia, but because they made more room for identity, regular interaction, and actual community.</p>
     </div>
   </div>
 </section>
 
-<!-- How it feels different -->
-<section class="section" style="padding-top: 20px;">
-  <div class="section-label">How it feels different</div>
+<!-- Features -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-label">what's inside</div>
   <div class="features">
     <div class="feature-card">
-      <div class="feature-title">Screennames</div>
-      <p class="feature-desc"><em>Instead of</em> everything being face-first.</p>
+      <div class="feature-kicker">01</div>
+      <div class="feature-title">your screenname</div>
+      <p class="feature-desc">Pick a name that represents you. Set a status. Let your buddies see when you're around.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-title">Away messages</div>
-      <p class="feature-desc"><em>Instead of</em> dead bios.</p>
+      <div class="feature-kicker">02</div>
+      <div class="feature-title">chat rooms</div>
+      <p class="feature-desc">Community rooms organized by city and interest. See who's around, jump in, and add people to your buddy list when you click.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-title">Buddy lists</div>
-      <p class="feature-desc"><em>Instead of</em> passive follows.</p>
+      <div class="feature-kicker">03</div>
+      <div class="feature-title">buddy list + away messages</div>
+      <p class="feature-desc">A list of the people you <em>actually</em> talk to. Set an away message — <em>"grabbing coffee," "heads-down at work"</em> — status as self-expression, the way it used to be.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-title">Chat rooms</div>
-      <p class="feature-desc"><em>Instead of</em> one-on-one pressure.</p>
+      <div class="feature-kicker">04</div>
+      <div class="feature-title">direct messages</div>
+      <p class="feature-desc">Private one-to-one conversations with your buddies. Text, photos, and voice notes. Messages queue offline and send when you're back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Safety -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-inner">
+    <div class="section-label">built for safety &amp; privacy</div>
+    <div class="safety-list">
+      <div class="safety-item"><span class="tick">✓</span><span><strong>Block and report</strong> on every profile, every message, and every room.</span></div>
+      <div class="safety-item"><span class="tick">✓</span><span>A <strong>content filter</strong> screens messages before they are delivered.</span></div>
+      <div class="safety-item"><span class="tick">✓</span><span>Notification previews default to <strong>sender-only</strong>.</span></div>
+      <div class="safety-item"><span class="tick">✓</span><span><strong>Face ID / Touch ID app lock</strong> keeps your conversations yours.</span></div>
+      <div class="safety-item"><span class="tick">✓</span><span><strong>Delete your account</strong> anytime, with your data erased.</span></div>
+      <div class="safety-item"><span class="tick">✓</span><span><strong>Download a full copy</strong> of your data whenever you want.</span></div>
     </div>
   </div>
 </section>
 
 <!-- Why link block -->
 <div class="why-link-block">
-  <a href="why.html">Read why we're building this differently &rarr;</a>
+  <a href="why.html">read why we built this differently &rarr;</a>
 </div>
 
 <!-- Bottom CTA -->
 <section class="bottom-cta">
-  <div class="section-body" style="max-width: 480px; margin: 0 auto 32px;">
-    <p>If you've been looking for something more social and less transactional, get on the list.</p>
+  <h2>your <span class="grad-text">buddy list</span> is waiting.</h2>
+  <div class="section-body">
+    <p>If you've been looking for something more social and less transactional — it's here.</p>
   </div>
-  <div class="form-wrap" style="margin: 0 auto; opacity: 1; animation: none;">
-    <div class="form-row" id="form-row-bottom">
-      <input type="email" id="email-input-bottom" placeholder="your@email.com" autocomplete="email" />
-      <button onclick="handleSubmitBottom()">Get on the list</button>
-    </div>
-    <div class="success-msg" id="success-msg-bottom">
-      You're on the list. We'll reach out before launch.
-    </div>
-    <p class="form-note">No spam. No nonsense. Just launch updates and early access.</p>
+  <div class="cta-wrap" style="opacity: 1; animation: none;">
+    <a class="store-btn" href="https://apps.apple.com/us/app/h-i-m/id6761863631" target="_blank" rel="noopener">
+      <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="lines">
+        <span class="small">download on the</span>
+        <span class="big">App Store</span>
+      </span>
+    </a>
+    <p class="cta-note">free · social networking · 18+</p>
   </div>
 </section>
 
 <footer>
-  <div class="footer-wordmark">H.I.M.</div>
-  <div class="footer-tagline">Friendship-first social for gay men.</div>
-  <div class="footer-note">hiitsme.app &middot; &copy; 2025 Saman Technologies LLC</div>
+  <div class="footer-wordmark grad-text">H.I.M.</div>
+  <div class="footer-tagline">the social internet that felt like home.</div>
+  <div class="footer-note"><a href="privacy.html">privacy</a> &middot; <a href="terms.html">terms</a> &middot; hiitsme.app &middot; &copy; 2026 Saman Technologies LLC</div>
 </footer>
-
-<script>
-function handleSubmit() {
-  var email = document.getElementById('email-input').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('email-input').style.outline = '2px solid var(--rose)';
-    setTimeout(function() { document.getElementById('email-input').style.outline = ''; }, 1200);
-    return;
-  }
-  document.getElementById('form-row').style.display = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-  fetch('https://formspree.io/f/xlgoowzq', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, source: 'HIM landing page - hero' })
-  });
-}
-
-function handleSubmitBottom() {
-  var email = document.getElementById('email-input-bottom').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('email-input-bottom').style.outline = '2px solid var(--rose)';
-    setTimeout(function() { document.getElementById('email-input-bottom').style.outline = ''; }, 1200);
-    return;
-  }
-  document.getElementById('form-row-bottom').style.display = 'none';
-  document.getElementById('success-msg-bottom').style.display = 'block';
-  fetch('https://formspree.io/f/xlgoowzq', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, source: 'HIM landing page - bottom CTA' })
-  });
-}
-
-document.getElementById('email-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') handleSubmit();
-});
-
-document.getElementById('email-input-bottom').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') handleSubmitBottom();
-});
-</script>
 
 </body>
 </html>
