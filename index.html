@@ -593,6 +593,77 @@ nav {
 
 .bottom-cta .section-body { max-width: 480px; margin: 0 auto 32px; }
 
+/* studio block */
+.studio-block {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.studio-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.studio-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--chiraag-glow), var(--chiraag-strong));
+  opacity: 0.4;
+}
+
+.studio-card:hover { border-color: var(--chiraag-brd); }
+
+.studio-info { flex: 1; min-width: 240px; }
+
+.studio-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--chiraag);
+  margin-bottom: 8px;
+}
+
+.studio-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.studio-text strong { color: var(--text); font-weight: 600; }
+
+.studio-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--chiraag);
+  background: var(--chiraag-dim);
+  border: 1px solid var(--chiraag-brd);
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 11px 18px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.studio-link:hover { background: rgba(232,162,58,0.18); }
+
 /* footer */
 footer {
   border-top: 1px solid var(--border);
@@ -816,6 +887,17 @@ footer {
     <p class="cta-note">free · ios + web · 18+</p>
   </div>
 </section>
+
+<!-- Studio -->
+<div class="studio-block">
+  <div class="studio-card">
+    <div class="studio-info">
+      <div class="studio-label">from the studio</div>
+      <p class="studio-text">H.I.M. is made by <strong>Samaan Technologies</strong> — a small Orlando studio publishing apps and systems. <em>Digital provisions for modern life.</em></p>
+    </div>
+    <a class="studio-link" href="https://samaan.tech" target="_blank" rel="noopener">samaan.tech &rarr;</a>
+  </div>
+</div>
 
 <footer>
   <div class="footer-wordmark grad-text">H.I.M.</div>
